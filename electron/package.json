@@ -1,0 +1,88 @@
+{
+  "name": "health-dashboard",
+  "version": "1.0.0",
+  "description": "Health Disease Analytics Dashboard",
+  "author": "Health Dashboard Team",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.health.dashboard",
+    "productName": "HealthDashboard",
+    "directories": {
+      "output": "../release"
+    },
+    "files": [
+      "main.js",
+      "package.json",
+      "preload.js",
+      "favicon.ico"
+    ],
+    "extraResources": [
+      {
+        "from": "../backend",
+        "to": "backend",
+        "filter": [
+          "**/*.py",
+          "**/*.txt",
+          "!**/__pycache__/**",
+          "!**/*.pyc",
+          "!**/.venv/**"
+        ]
+      },
+      {
+        "from": "../collector",
+        "to": "collector",
+        "filter": [
+          "**/*.py",
+          "**/*.txt",
+          "!**/__pycache__/**",
+          "!**/*.pyc",
+          "!**/debug/**"
+        ]
+      },
+      {
+        "from": "../frontend/dist",
+        "to": "frontend-dist"
+      },
+      {
+        "from": "../build/dist/backend.exe",
+        "to": "backend/backend.exe"
+      },
+      {
+        "from": "../build/dist/run_sync.exe",
+        "to": "collector/run_sync.exe"
+      },
+      {
+        "from": "favicon.ico",
+        "to": "favicon.ico"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "favicon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "医疗疾病信息看板",
+      "installerIcon": "favicon.ico",
+      "uninstallerIcon": "favicon.ico",
+      "installerHeaderIcon": "favicon.ico",
+      "include": "installer.nsh"
+    }
+  }
+}
