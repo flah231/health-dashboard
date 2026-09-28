@@ -65,3 +65,7 @@ collector/debug/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+.env
+.env.local
+backend/.env
