@@ -67,5 +67,11 @@ Thumbs.db
 desktop.ini
 
 .env
-.env.local
 backend/.env
+
+# 调试脚本
+collector/debug_*.py
+collector/parse_test.py
+
+# 旧 MySQL 脚本（已迁移到 SQLite）
+database/
